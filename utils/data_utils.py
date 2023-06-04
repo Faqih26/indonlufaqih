@@ -521,7 +521,7 @@ class DocumentSentimentDataset(Dataset):
     def __getitem__(self, index):
         data = self.data.loc[index,:]
         text, sentiment = data['text'], data['sentiment']
-        subwords = self.tokenizer.encode(text, add_special_tokens=True,return_token_type_ids=True,return_attention_mask=True,pad_to_max_length=True,max_length =100,truncation=True)
+        subwords = self.tokenizer.encode(text, add_special_tokens=True,return_token_type_ids=True,return_attention_mask=True,pad_to_max_length=True,max_length =50,truncation=True)
         return np.array(subwords), np.array(sentiment), data['text']
     
     def __len__(self):
