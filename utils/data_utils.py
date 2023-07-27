@@ -521,11 +521,11 @@ class DocumentSentimentDataset(Dataset):
     def __getitem__(self, index):
         data = self.data.loc[index,:]
         text, sentiment = data['text'], data['sentiment']
-        subwords = self.tokenizer.encode(text, add_special_tokens=True,return_token_type_ids=True,return_attention_mask=True,pad_to_max_length=True,max_length =80,truncation=True)
+        subwords = self.tokenizer.encode(text, add_special_tokens=not self.no_special_token)
         return np.array(subwords), np.array(sentiment), data['text']
     
     def __len__(self):
-        return len(self.data)    
+        return len(self.data)      
         
 class DocumentSentimentDataLoader(DataLoader):
     def __init__(self, max_seq_len=512, *args, **kwargs):
